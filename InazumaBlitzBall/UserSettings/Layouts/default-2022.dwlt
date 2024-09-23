@@ -14,8 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 8
     y: 453
+=======
+    x: -73
+    y: 392
+>>>>>>> KUBO
     width: 1188
     height: 649
   m_ShowMode: 4
@@ -299,8 +304,13 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 8
     y: 836
+=======
+    x: -73
+    y: 775
+>>>>>>> KUBO
     width: 906
     height: 225
   m_SerializedDataModeController:
@@ -339,9 +349,15 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
     m_SelectedIDs: 78590000
     m_LastClickedID: 22904
     m_ExpandedIDs: 000000001c5b000000ca9a3b
+=======
+    m_SelectedIDs: 025b0000
+    m_LastClickedID: 23298
+    m_ExpandedIDs: 00000000ec5a000000ca9a3bffffff7f
+>>>>>>> KUBO
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -492,8 +508,13 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 8
     y: 483
+=======
+    x: -73
+    y: 422
+>>>>>>> KUBO
     width: 221
     height: 332
   m_SerializedDataModeController:
@@ -509,9 +530,15 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
       m_SelectedIDs: e4590000
       m_LastClickedID: 23012
       m_ExpandedIDs: 4afaffff
+=======
+      m_SelectedIDs: 285b0000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 2cfbffff
+>>>>>>> KUBO
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -555,8 +582,13 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 230
     y: 483
+=======
+    x: 149
+    y: 422
+>>>>>>> KUBO
     width: 683
     height: 332
   m_SerializedDataModeController:
