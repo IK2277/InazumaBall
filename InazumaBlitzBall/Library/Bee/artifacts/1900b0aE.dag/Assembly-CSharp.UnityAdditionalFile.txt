@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-D:\InazumaBall\InazumaBlitzBall
-=======
 C:\Users\ktaka\Github\InazumaBlitz\InazumaBlitzBall
->>>>>>> KUBO
