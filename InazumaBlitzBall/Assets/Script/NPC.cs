@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
+    //public変数
     [SerializeField] Game game; //メインスクリプト
-    [SerializeField] Stage stage; //ステージ
+    [SerializeField] Stage stage; //ステージスクリプト
 
     void Start()
     {
@@ -15,6 +16,7 @@ public class NPC : MonoBehaviour
 
     void Update()
     {
+        //アクションとコマンドでの機能切り替え
         if (!game.isCommand)
         {
 

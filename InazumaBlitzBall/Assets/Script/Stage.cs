@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Stage : MonoBehaviour
 {
-    [SerializeField] Transform sphereCenter;
-    public float sphereRadius = 23.0f;
+    //public•Ï”
+    [SerializeField] Transform sphereCenter; //Stage‚Ì’†SÀ•W
+    public float sphereRadius = 23.0f; //Stage‚Ì”¼Œa
+
     void Start()
     {
         
@@ -16,6 +18,7 @@ public class Stage : MonoBehaviour
         
     }
 
+    //Stage‚Æ‚ÌÕ“Ë”»’è
     public bool Collision(Vector3 position)
     {
         if(Vector3.Distance(position, sphereCenter.position) > sphereRadius)
