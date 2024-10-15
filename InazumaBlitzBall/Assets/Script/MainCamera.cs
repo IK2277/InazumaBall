@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ユーザーを映すカメラに関するスクリプト
 public class MainCamera : MonoBehaviour
 {
     //public変数
-    [SerializeField] Game game; //メインスクリプト
-    [SerializeField] GameObject user; //ユーザーオブジェクト
+    [SerializeField] Game game; //Gameスクリプト
+    [SerializeField] GameObject user; //Userオブジェクト
+    public float sensitivity = 1.0f; //カメラ感度
 
     //private変数
-    Vector3 pos; //プレイヤーの現在地
-    Vector3 pastPos; //プレイヤーの過去位置
+    Vector3 pos; //Userの現在地
+    Vector3 pastPos; //Userの過去位置
 
     void Start()
     {
@@ -26,11 +28,11 @@ public class MainCamera : MonoBehaviour
 
             if (Mathf.Abs(mx) > 0.01f)
             {
-                transform.RotateAround(user.transform.position, Vector3.up, mx);
+                transform.RotateAround(user.transform.position, Vector3.up, mx * sensitivity);
             }
             if (Mathf.Abs(my) > 0.01f)
             {
-                transform.RotateAround(user.transform.position, transform.right, -my);
+                transform.RotateAround(user.transform.position, transform.right, -my * sensitivity);
             }
         }
 

@@ -1,18 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 
+//コマンド画面に関するスクリプト
 public class CommandView : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	//public変数
+	[SerializeField] Button shootButton; //ShootButtonのButton
+	[SerializeField] Button passButton; //PassButtonのButton
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	void Start()
+	{
+
+	}
+
+	void Update()
+	{
+
+	}
+
+	//ShootButtonのクリック判定
+	public Button.ButtonClickedEvent OnShootButton
+	{
+		get
+		{
+			return shootButton.onClick;
+		}
+	}
+
+	//PassButtonのクリック判定
+	public Button.ButtonClickedEvent OnPassButton
+	{
+		get
+		{
+			return passButton.onClick;
+		}
+	}
 }
