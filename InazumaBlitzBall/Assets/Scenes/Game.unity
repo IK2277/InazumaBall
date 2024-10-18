@@ -1099,7 +1099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
+  m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1128,7 +1128,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -2568,18 +2568,6 @@ MonoBehaviour:
   stage: {fileID: 1538458474}
   game: {fileID: 1807578070}
   isKeeper: 0
-  isBallCatch: 0
-  charaName: 100
-  maxHP: 5
-  spd: 5
-  pas: 6
-  sht: 7
-  phy: 8
-  cut: 9
-  atk: 4
-  cat: 3
-  attribute: 1
-  nowHP: 0
 --- !u!4 &8744750287138585034 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400108, guid: 7d3425a6c7317e048be11c2ff72db69e, type: 3}
@@ -2603,19 +2591,7 @@ MonoBehaviour:
   game: {fileID: 1807578070}
   isKeeper: 0
   isUser: 1
-  isBallCatch: 0
   moveSpeed: 5
-  charaName: Kubota
-  maxHP: 100
-  spd: 10
-  pas: 10
-  sht: 10
-  phy: 10
-  cut: 10
-  atk: 10
-  cat: 10
-  attribute: 0
-  nowHP: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

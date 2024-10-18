@@ -1,0 +1,21 @@
+diff a/InazumaBlitzBall/Assets/Scenes/Game.unity b/InazumaBlitzBall/Assets/Scenes/Game.unity	(rejected hunks)
+@@ -2603,7 +2603,19 @@
+   game: {fileID: 1807578070}
+   isKeeper: 0
+   isUser: 1
++  isBallCatch: 0
+   moveSpeed: 5
++  charaName: Kubota
++  maxHP: 100
++  spd: 10
++  pas: 10
++  sht: 10
++  phy: 10
++  cut: 10
++  atk: 10
++  cat: 10
++  attribute: 0
++  nowHP: 0
+ --- !u!1660057539 &9223372036854775807
+ SceneRoots:
+   m_ObjectHideFlags: 0
