@@ -6,8 +6,8 @@ using UnityEngine;
 public class MainCamera : MonoBehaviour
 {
     //public変数
-    [SerializeField] Game game; //Gameスクリプト
-    [SerializeField] GameObject user; //Userオブジェクト
+    [SerializeField] Game_C game_C; //Gameスクリプト
+    [SerializeField] GameObject frontObject; //追従先オブジェクト
     public float sensitivity = 1.0f; //カメラ感度
 
     //private変数
@@ -16,7 +16,7 @@ public class MainCamera : MonoBehaviour
 
     void Start()
     {
-        pastPos = user.transform.position;
+        pastPos = frontObject.transform.position;
     }
 
     void Update()
@@ -28,20 +28,20 @@ public class MainCamera : MonoBehaviour
 
             if (Mathf.Abs(mx) > 0.01f)
             {
-                transform.RotateAround(user.transform.position, Vector3.up, mx * sensitivity);
+                transform.RotateAround(frontObject.transform.position, Vector3.up, mx * sensitivity);
             }
             if (Mathf.Abs(my) > 0.01f)
             {
-                transform.RotateAround(user.transform.position, transform.right, -my * sensitivity);
+                transform.RotateAround(frontObject.transform.position, transform.right, -my * sensitivity);
             }
         }
 
         //アクションとコマンドでの機能切り替え
-        if (!game.isCommand)
+        if (!game_C.isCommand)
         {
             //カメラの位置
             {
-                pos = user.transform.position;
+                pos = frontObject.transform.position;
                 transform.position = Vector3.Lerp(transform.position, transform.position + pos - pastPos, 1.0f);
                 pastPos = pos;
             }
@@ -50,5 +50,12 @@ public class MainCamera : MonoBehaviour
         {
 
         }
+    }
+
+    public void SetFrontObject(GameObject setFrontObject)
+    {
+        frontObject = setFrontObject;
+        pastPos = setFrontObject.transform.position;
+        transform.position = setFrontObject.transform.position + new Vector3(0, 2, -5);
     }
 }

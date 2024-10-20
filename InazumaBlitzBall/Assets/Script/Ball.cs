@@ -5,6 +5,8 @@ using UnityEngine;
 //ボールに関するスクリプト
 public class Ball : MonoBehaviour
 {
+    //public変数
+    public bool teamBall = true;
     //private変数
     GameObject collisionObject; //衝突したオブジェクト
     GameObject ballCatch; //collisionObjectの子オブジェクト(BallCatch)
@@ -20,7 +22,7 @@ public class Ball : MonoBehaviour
         if(collisionObject != null)
         {
             //衝突したオブジェクトの衝突範囲から離れた場合
-            if ((collisionObject.GetComponent<SphereCollider>().radius)* 1.5f < (gameObject.transform.position - collisionObject.transform.position).magnitude)
+            if ((collisionObject.GetComponent<SphereCollider>().radius)* 1.3f < (gameObject.transform.position - collisionObject.transform.position).magnitude)
             {
                 collisionObject = null;
                 transform.parent = null;
@@ -35,21 +37,15 @@ public class Ball : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().AddForce(vector);
     }
 
-
-    //衝突判定
-    void OnCollisionEnter(Collision collision)
+    public void Catch(GameObject catchObject)
     {
-        //UserもしくはEnemyとの衝突判定
-        if (collision.gameObject.name == "User" || collision.gameObject.name == "Enemy")
-        {
-            collisionObject = collision.gameObject;
-            ballCatch = collisionObject.transform.Find("BallCatch").gameObject;
-            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            collisionObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            transform.position = new Vector3(ballCatch.transform.position.x, ballCatch.transform.position.y, ballCatch.transform.position.z);
-            ColliderAvailable = false;
-            transform.SetParent(ballCatch.transform);
-        }
+        collisionObject = catchObject;
+        ballCatch = collisionObject.transform.Find("BallCatch").gameObject;
+        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        collisionObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        transform.position = new Vector3(ballCatch.transform.position.x, ballCatch.transform.position.y, ballCatch.transform.position.z);
+        ColliderAvailable = false;
+        transform.SetParent(ballCatch.transform);
     }
 
     //Colliderのオンオフ切り替え

@@ -14,11 +14,11 @@ TagManager:
   - Stage
   - PostProcess
   - User
-  - NPC
+  - Enemy
   - Ball
   - Goal
   - OwnGoal
-  - 
+  - Keeper
   - 
   - 
   - 
