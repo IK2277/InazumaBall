@@ -11,6 +11,9 @@ public class CommandView_C : MonoBehaviour
 	[SerializeField] GameObject uve; //UvEオブジェクト
 	[SerializeField] GameObject uvb; //UvBオブジェクト
 	[SerializeField] GameObject uvg; //UvGオブジェクト
+	public Image PassImage;
+	public Image DribbleImage;
+	public int selectCommand = 0;
 	[SerializeField] GameObject onPassPanel; //OnPassPanelオブジェクト
 											 //private変数
 	GameObject selectedPanel; //操作中のパネル
@@ -21,7 +24,8 @@ public class CommandView_C : MonoBehaviour
 
 	void Start()
 	{
-
+		PassImage.enabled = false;
+		DribbleImage.enabled = false;
 	}
 
 	void Update()
@@ -37,6 +41,7 @@ public class CommandView_C : MonoBehaviour
 		{
 			//パネル表示
 			uve.SetActive(true);
+			PassImage.enabled = true;
 			//Button設定
 			passButton = uve.transform.Find("PassButton").gameObject.GetComponent<Button>();
 			dribbleButton = uve.transform.Find("DribbleButton").gameObject.GetComponent<Button>();

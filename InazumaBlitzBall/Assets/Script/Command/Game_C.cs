@@ -28,6 +28,46 @@ public class Game_C : MonoBehaviour
 
     void Update()
     {
+        if (isCommand)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                commandView_C.selectCommand--;
+                if (commandView_C.selectCommand < 0)
+                {
+                    commandView_C.selectCommand = 1;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                commandView_C.selectCommand++;
+                if (commandView_C.selectCommand > 1)
+                {
+                    commandView_C.selectCommand = 0;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                if (commandView_C.selectCommand == 0)
+                {
+                    Debug.Log("パス");
+                }
+                if (commandView_C.selectCommand == 1)
+                {
+                    Debug.Log("ドリブル");
+                }
+            }
+        }
+        if (commandView_C.selectCommand == 1)
+        {
+            commandView_C.PassImage.enabled = false;
+            commandView_C.DribbleImage.enabled = true;
+        }
+        if (commandView_C.selectCommand == 0)
+        {
+            commandView_C.PassImage.enabled = true;
+            commandView_C.DribbleImage.enabled = false;
+        }
         
     }
 
@@ -53,6 +93,7 @@ public class Game_C : MonoBehaviour
             {
                 commandView_C.OnPassButton.AddListener(Pass);
                 commandView_C.OnDribbleButton.AddListener(Dribble);
+                
             }
         }
         if (panelName == "UvB")
