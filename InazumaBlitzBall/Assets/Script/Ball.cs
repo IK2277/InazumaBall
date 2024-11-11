@@ -6,10 +6,11 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     //public変数
-    public bool teamBall = true;
+    public bool userBall = true;
     //private変数
     GameObject collisionObject; //衝突したオブジェクト
     GameObject ballCatch; //collisionObjectの子オブジェクト(BallCatch)
+    float ballSpeed = 200.0f;
 
     void Start()
     {
@@ -34,7 +35,7 @@ public class Ball : MonoBehaviour
     //ボール発射
     public void Throw(Vector3 vector)
     {
-        gameObject.GetComponent<Rigidbody>().AddForce(vector);
+        gameObject.GetComponent<Rigidbody>().AddForce(vector*ballSpeed);
     }
 
     public void Catch(GameObject catchObject)
@@ -54,6 +55,14 @@ public class Ball : MonoBehaviour
         set
         {
             gameObject.GetComponent<SphereCollider>().enabled = value;
+        }
+    }
+
+    public bool UserBall
+    {
+        set
+        {
+            userBall = value;
         }
     }
 }

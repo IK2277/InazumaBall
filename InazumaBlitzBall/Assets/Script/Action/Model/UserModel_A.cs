@@ -9,8 +9,8 @@ public class UserModel_A : MonoBehaviour
     //public変数
     [SerializeField] MainCamera mainCamera; //MainCameraスクリプト
     [SerializeField] Stage stage; //Stageスクリプト
-    [SerializeField] Game_C game_C; //Gameスクリプト]
-    public bool isUser = true; //操作中判定
+    [SerializeField] Game_C game_C; //Gameスクリプト
+    public bool isUser = false; //操作中判定
     public float moveSpeed = 5.0f; //移動速度
     //private変数
     Vector3 userVec; //移動方向ベクトル
@@ -25,7 +25,9 @@ public class UserModel_A : MonoBehaviour
 
     void Start()
     {
-        
+        mainCamera　= GameObject.Find("MainCamera").gameObject.GetComponent<MainCamera>();
+        stage = GameObject.Find("Stage").gameObject.GetComponent<Stage>();
+        game_C = GameObject.Find("Game").gameObject.GetComponent<Game_C>();
     }
 
     void Update()
@@ -107,6 +109,21 @@ public class UserModel_A : MonoBehaviour
         else
         {
 
+        }
+    }
+
+    public void SetUp(MainCamera mainCamera,Stage stage,Game_C game_C)
+    {
+        this.mainCamera = mainCamera;
+        this.stage = stage;
+        this.game_C = game_C;
+    }
+
+    public bool IsUser
+    {
+        set
+        {
+            isUser = value;
         }
     }
 }

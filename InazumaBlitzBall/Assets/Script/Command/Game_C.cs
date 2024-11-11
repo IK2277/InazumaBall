@@ -8,13 +8,10 @@ using UnityEngine.SceneManagement;
 public class Game_C : MonoBehaviour
 {
     //public変数
-    [SerializeField] GameObject ui; //UIオブジェクト
     [SerializeField] GameObject commandView; //CommandViewオブジェクト
-    [SerializeField] GameObject user; //Userオブジェクト
     public bool isCommand = false; //コマンド画面判定
     //private変数
     CommandView_C commandView_C; //CommandViewスクリプト
-    UserModel_C userModel_C; //UserModelスクリプト
 
     void Start()
     {
@@ -36,70 +33,15 @@ public class Game_C : MonoBehaviour
     {
         //モデル設定
         {
-            userModel_C = user.GetComponent<UserModel_C>();
+
         }
     }
 
     //コマンド開始
-    public void Command(string panelName)
+    public void Command(UserModel_C userModel_C,string panelName)
     {
         isCommand = true;
-        ui.SetActive(false);
         commandView.SetActive(true);
-        if (panelName == "UvE")
-        {
-            commandView_C.SelectedPanel(panelName);
-            //関数の呼び出し設定
-            {
-                commandView_C.OnPassButton.AddListener(Pass);
-                commandView_C.OnDribbleButton.AddListener(Dribble);
-            }
-        }
-        if (panelName == "UvB")
-        {
-            commandView_C.SelectedPanel(panelName);
-            //関数の呼び出し設定
-            {
-                commandView_C.OnPassCutButton.AddListener(PassCut);
-            }
-        }
-        if (panelName == "UvG")
-        {
-            commandView_C.SelectedPanel(panelName);
-            //関数の呼び出し設定
-            {
-                commandView_C.OnShootButton.AddListener(Shoot);
-            }
-        }
-    }
-
-    //パス選択時
-    public void Pass()
-    {
-        commandView_C.ButtonReset();
-        commandView_C.SelectedPanel("OnPassPanel");
-        //関数の呼び出し設定
-        {
-
-        }
-    }
-
-    //ドリブル選択時
-    public void Dribble()
-    {
-
-    }
-
-    //パスカット選択時
-    public void PassCut()
-    {
-
-    }
-
-    //シュート選択時
-    public void Shoot()
-    {
-        userModel_C.Shoot();
-        Debug.Log("Shoot()");
+        commandView_C.SelectedPanel(userModel_C, panelName);
     }
 }

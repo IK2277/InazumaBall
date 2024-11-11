@@ -6,8 +6,6 @@ using UnityEngine;
 public class Stage : MonoBehaviour
 {
     //public•Ï”
-    [SerializeField] Transform sphereCenter; //Stage‚Ì’†SÀ•W
-    public float sphereRadius = 23.0f; //Stage‚Ì”¼Œa
 
     void Start()
     {
@@ -22,8 +20,8 @@ public class Stage : MonoBehaviour
     //Stage”ÍˆÍ“à”»’è
     public bool Collision(Vector3 position)
     {
-        if(Vector3.Distance(position, sphereCenter.position) > sphereRadius)
-        {
+        if(Vector3.Distance(position, this.transform.position) > (this.transform.localScale.z/2) || Vector3.Distance(position, this.transform.position) < (-this.transform.localScale.z / 2))
+        {            
             return true;
         }
         else

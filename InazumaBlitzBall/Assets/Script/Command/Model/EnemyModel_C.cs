@@ -6,11 +6,16 @@ using UnityEngine;
 //エネミーの制御(Command)
 public class EnemyModel_C : MonoBehaviour
 {
+    //public変数
+    [SerializeField] GameObject userGoal; //Goalオブジェクト
+    [SerializeField] Ball ball; //Ballスクリプト
+    [SerializeField] Game_C game_C; //Gameスクリプト
     // キャラクターデータ(初期ステータス)
     [Header("キャラクター名")]
     public string charaName; // キャラクター名
     [Header("最大HP(初期HP)")]
     public int maxHP; // 最大HP→ボール持ってると減少、アビリティ使用で減少、なくなるとコマンドバトルは基本敗北.
+    /*
     [Header("スピード")]
     public int spd; // スピード→移動の速さ.
     [Header("パス")]
@@ -37,6 +42,7 @@ public class EnemyModel_C : MonoBehaviour
         Wind,  // 風属性
         Soil,  // 土属性
     }
+    */
 
     void Start()
     {
@@ -46,5 +52,11 @@ public class EnemyModel_C : MonoBehaviour
     void Update()
     {
         
+    }
+    public void SetUp(GameObject userGoal, Ball ball, Game_C game_C)
+    {
+        this.userGoal = userGoal;
+        this.ball = ball;
+        this.game_C = game_C;
     }
 }

@@ -7,7 +7,7 @@ using static UnityEditor.PlayerSettings;
 public class UserModel_C : MonoBehaviour
 {
     //public変数
-    [SerializeField] GameObject goal; //Goalオブジェクト
+    [SerializeField] GameObject enemyGoal; //Goalオブジェクト
     [SerializeField] Ball ball; //Ballスクリプト
     [SerializeField] Game_C game_C; //Gameスクリプト
     //private変数
@@ -17,6 +17,7 @@ public class UserModel_C : MonoBehaviour
     public string charaName; // キャラクター名
     [Header("最大HP(初期HP)")]
     public int maxHP; // 最大HP→ボール持ってると減少、アビリティ使用で減少、なくなるとコマンドバトルは基本敗北.
+    /*
     [Header("スピード")]
     public int spd; // スピード→移動の速さ.
     [Header("パス")]
@@ -43,6 +44,7 @@ public class UserModel_C : MonoBehaviour
         Wind,  // 風属性
         Soil,  // 土属性
     }
+    */
 
     void Start()
     {
@@ -54,11 +56,37 @@ public class UserModel_C : MonoBehaviour
         
     }
 
+    public void SetUp(GameObject enemyGoal, Ball ball, Game_C game_C)
+    {
+        this.enemyGoal = enemyGoal;
+        this.ball = ball;
+        this.game_C = game_C;
+    }
+    public void Pass()
+    {
+
+    }
+
+    public void PassCut()
+    {
+
+    }
+
+    public void Dribble()
+    {
+
+    }
+
+    public void DribbleCut()
+    {
+
+    }
+
     //シュート行動
     public void Shoot()
     {
-        goalVec = new Vector3(goal.transform.position.x - transform.position.x, goal.transform.position.y - transform.position.y, goal.transform.position.z - transform.position.z);
-        goalVec = goalVec.normalized * 200.0f;
+        goalVec = new Vector3(enemyGoal.transform.position.x - transform.position.x, enemyGoal.transform.position.y - transform.position.y, enemyGoal.transform.position.z - transform.position.z);
+        goalVec = goalVec.normalized;
         ball.Throw(goalVec);
     }
 
@@ -66,29 +94,29 @@ public class UserModel_C : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         //Enemyとの衝突判定
-        if (collision.gameObject.name == "Enemy")
+        if (collision.gameObject.name == "Enemy(Clone)")
         {
-            game_C.Command("UvE");
+            game_C.Command(this.GetComponent<UserModel_C>(),"UvE");
         }
 
         //Ballとの衝突判定
         if (collision.gameObject.name == "Ball")
         {
             //味方ボールと敵ボールで機能切り替え
-            if (collision.gameObject.GetComponent<Ball>().teamBall)
+            if (collision.gameObject.GetComponent<Ball>().userBall)
             {
                 collision.gameObject.GetComponent<Ball>().Catch(this.gameObject);
             }
             else
             {
-                game_C.Command("UvB");
+                game_C.Command(this.GetComponent<UserModel_C>(), "UvB");
             }
         }
 
         //ゴールとの衝突判定
         if (collision.gameObject.name == "Goal")
         {
-            game_C.Command("UvG");
+            game_C.Command(this.GetComponent<UserModel_C>(), "UvG");
         }
     }
 }

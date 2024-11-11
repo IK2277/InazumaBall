@@ -26,4 +26,9 @@ public class EnemyModel_A : MonoBehaviour
 
         }
     }
+    public void SetUp(MainCamera mainCamera, Stage stage, Game_C game_C)
+    {
+        this.stage = stage;
+        this.game_C = game_C;
+    }
 }
