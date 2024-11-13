@@ -6,11 +6,18 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     //public変数
+    [SerializeField] GameObject lastUser;
+    [SerializeField] MainCamera mainCamera;
+    [SerializeField] Stage stage;
+    [SerializeField] Game_C game_C;
+    public int power = 0;
     public bool userBall = true;
     //private変数
     GameObject collisionObject; //衝突したオブジェクト
     GameObject ballCatch; //collisionObjectの子オブジェクト(BallCatch)
-    float ballSpeed = 200.0f;
+    float ballSpeed = 10.0f;
+    Vector3 vec;
+
 
     void Start()
     {
@@ -22,20 +29,28 @@ public class Ball : MonoBehaviour
         //衝突と非衝突での機能切り替え
         if(collisionObject != null)
         {
-            //衝突したオブジェクトの衝突範囲から離れた場合
-            if ((collisionObject.GetComponent<SphereCollider>().radius)* 1.3f < (gameObject.transform.position - collisionObject.transform.position).magnitude)
-            {
-                collisionObject = null;
-                transform.parent = null;
-                ColliderAvailable = true;
-            }
+            transform.position = transform.parent.transform.position;
+        }
+        if (stage.Collision(transform.position))
+        {
+            vec = this.transform.GetComponent<Rigidbody>().velocity;
+            this.transform.GetComponent<Rigidbody>().velocity = new Vector3(-0.1f * vec.x, -0.1f * vec.y, -0.1f * vec.z);
         }
     }
 
     //ボール発射
     public void Throw(Vector3 vector)
     {
-        gameObject.GetComponent<Rigidbody>().AddForce(vector*ballSpeed);
+        collisionObject = null;
+        transform.parent = null;
+        gameObject.GetComponent<Rigidbody>().velocity = vector * ballSpeed;
+        mainCamera.SetFrontObject(this.gameObject);
+        Invoke("ThrowDelay", 0.5f);
+    }
+
+    void ThrowDelay()
+    {
+        ColliderAvailable = true;
     }
 
     public void Catch(GameObject catchObject)
@@ -47,10 +62,34 @@ public class Ball : MonoBehaviour
         transform.position = new Vector3(ballCatch.transform.position.x, ballCatch.transform.position.y, ballCatch.transform.position.z);
         ColliderAvailable = false;
         transform.SetParent(ballCatch.transform);
+
+        power = 0;
+
+        if (catchObject.gameObject.name == "User(Clone)")
+        {
+            userBall = true;
+            lastUser = catchObject;
+            mainCamera.SetFrontObject(catchObject);
+            catchObject.gameObject.GetComponent<UserModel_A>().IsUser = true;
+        }
+        if (catchObject.gameObject.name == "Enemy(Clone)")
+        {
+            userBall = false;
+            mainCamera.SetFrontObject(lastUser);
+            lastUser.gameObject.GetComponent<UserModel_A>().IsUser = true;
+            catchObject.GetComponent<EnemyModel_A>().IsEnemy = true;
+        }
+        if (catchObject.gameObject.name == "Keeper")
+        {
+            if (userBall) { userBall = false; } else { userBall = true; }
+            mainCamera.SetFrontObject(catchObject);
+        }
+
+        game_C.IsCommand = false;
     }
 
     //Colliderのオンオフ切り替え
-    bool ColliderAvailable
+    public bool ColliderAvailable
     {
         set
         {

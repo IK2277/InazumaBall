@@ -8,7 +8,7 @@ public class MainCamera : MonoBehaviour
     //public変数
     [SerializeField] Game_C game_C; //Gameスクリプト
     [SerializeField] GameObject frontObject; //追従先オブジェクト
-    public float sensitivity = 1.0f; //カメラ感度
+    public float sensitivity; //カメラ感度
 
     //private変数
     Vector3 pos; //Userの現在地
@@ -16,6 +16,7 @@ public class MainCamera : MonoBehaviour
 
     void Start()
     {
+        sensitivity = 5.0f;
         pastPos = frontObject.transform.position;
     }
 
@@ -36,26 +37,25 @@ public class MainCamera : MonoBehaviour
             }
         }
 
-        //アクションとコマンドでの機能切り替え
-        if (!game_C.isCommand)
+        //カメラの位置
         {
-            //カメラの位置
-            {
-                pos = frontObject.transform.position;
-                transform.position = Vector3.Lerp(transform.position, transform.position + pos - pastPos, 1.0f);
-                pastPos = pos;
-            }
-        }
-        else
-        {
-
+            pos = frontObject.transform.position;
+            transform.position = Vector3.Lerp(transform.position, transform.position + pos - pastPos, 1.0f);
+            pastPos = pos;
         }
     }
 
+    void Reset()
+    {
+        transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+        transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+    }
     public void SetFrontObject(GameObject setFrontObject)
     {
+        Reset();
         frontObject = setFrontObject;
         pastPos = setFrontObject.transform.position;
-        transform.position = setFrontObject.transform.position + new Vector3(0, 2, -5);
+        transform.position = setFrontObject.transform.position;
+        transform.position += new Vector3(0.0f, 2.0f, -5.0f);
     }
 }
