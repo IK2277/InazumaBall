@@ -32,7 +32,7 @@ public class Game_A : MonoBehaviour
     }
 
     //試合の初期設定
-    void SetupGame()
+    public void SetupGame()
     {
         //オブジェクト初期配置
         {
@@ -40,18 +40,21 @@ public class Game_A : MonoBehaviour
             {
                 insObject = Instantiate(prefUser, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
                 insObject.transform.parent = userTeam.transform;
-                insObject.GetComponent<UserModel_A>().SetUp(mainCamera, stage, game_C);
-                insObject.GetComponent<UserModel_C>().SetUp(enemyGoal, ball, game_C);
                 switch (u)
                 {
                     case 0:
+                        insObject.GetComponent<UserModel_A>().SetUp(enemyGoal, mainCamera, stage, ball, game_C);
+                        insObject.GetComponent<UserModel_C>().SetUp(userTeam, enemyGoal, mainCamera, ball, game_C, "User1", 100);
                         insObject.transform.position = userTeam.transform.position;
                         insObject.GetComponent<UserModel_A>().IsUser = true;
+                        ball.Catch(insObject);
                         mainCamera.SetFrontObject(insObject);
                         break;
                     case 1:
+                        insObject.GetComponent<UserModel_A>().SetUp(enemyGoal, mainCamera, stage, ball, game_C);
+                        insObject.GetComponent<UserModel_C>().SetUp(userTeam, enemyGoal, mainCamera, ball, game_C, "User2", 100);
                         insObject.transform.position = userTeam.transform.position;
-                        insObject.transform.position += new Vector3(-2.0f, 0.0f, -2.0f);
+                        insObject.transform.position += new Vector3(-10.0f, 0.0f, -10.0f);
                         break;
                 }
             }
@@ -59,16 +62,19 @@ public class Game_A : MonoBehaviour
             {
                 insObject = Instantiate(prefEnemy, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
                 insObject.transform.parent = enemyTeam.transform;
-                insObject.GetComponent<EnemyModel_A>().SetUp(mainCamera, stage, game_C);
-                insObject.GetComponent<EnemyModel_C>().SetUp(userGoal, ball, game_C);
                 switch (e)
                 {
                     case 0:
+                        insObject.GetComponent<EnemyModel_A>().SetUp(userGoal, stage, ball, game_C);
+                        insObject.GetComponent<EnemyModel_C>().SetUp(enemyTeam, userGoal, ball, game_C, "Enemy1", 100);
                         insObject.transform.position = enemyTeam.transform.position;
+                        //ball.Catch(insObject);
                         break;
                     case 1:
+                        insObject.GetComponent<EnemyModel_A>().SetUp(userGoal, stage, ball, game_C);
+                        insObject.GetComponent<EnemyModel_C>().SetUp(enemyTeam, userGoal, ball, game_C, "Enemy2", 100);
                         insObject.transform.position = enemyTeam.transform.position;
-                        insObject.transform.position += new Vector3(2.0f, 0.0f, -2.0f);
+                        insObject.transform.position += new Vector3(10.0f, 0.0f, 10.0f);
                         break;
                 }
             }

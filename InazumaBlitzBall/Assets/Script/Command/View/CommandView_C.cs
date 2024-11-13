@@ -14,7 +14,9 @@ public class CommandView_C : MonoBehaviour
 	[SerializeField] GameObject onPassPanel; //OnPassPanelオブジェクト
     [SerializeField] GameObject onShootPanel; //OnPassPanelオブジェクト
     [SerializeField] Ball ball;
+    [SerializeField] Game_C game_C;
     //private変数
+    UserModel_C userModel_C;
     Button passButton; //操作パネルのPassButton
     Button passCutButton; //操作パネルのPassCutButton
     Button dribbleButton; //操作パネルのDribbleButton
@@ -34,13 +36,14 @@ public class CommandView_C : MonoBehaviour
 	}
 
 	//操作中のパネル設定
-	public void SelectedPanel(UserModel_C userModel_C, string panelName)
+	public void SelectedPanel(GameObject user, GameObject collision, string panelName)
 	{
+        userModel_C = user.GetComponent<UserModel_C>();
         //UvEパネル操作
         if (panelName == "UvE")
 		{
-			//パネル表示
-			uve.SetActive(true);
+            //パネル表示
+            uve.SetActive(true);
 			//Button設定
 			passButton = uve.transform.Find("PassButton").gameObject.GetComponent<Button>();
             passCutButton = uve.transform.Find("PassCutButton").gameObject.GetComponent<Button>();
@@ -50,6 +53,9 @@ public class CommandView_C : MonoBehaviour
             passCutButton.enabled = true;
             dribbleButton.enabled = true;
             dribbleCutButton.enabled = true;
+            if (userModel_C.hp < 20) { dribbleButton.enabled = false; }
+            if (userModel_C.hp < 10) { dribbleCutButton.enabled = false; }
+
             if (ball.userBall)
 			{
                 uve.transform.Find("PassButton").gameObject.SetActive(true);
@@ -66,21 +72,21 @@ public class CommandView_C : MonoBehaviour
             }
             {
                 OnPassButton.AddListener(() => {
-					passButton.enabled = false;
-					passCutButton.enabled = false;
-					dribbleButton.enabled = false;
-					dribbleCutButton.enabled = false;
-                    userModel_C.Pass();
-					//SelectedPanel(userModel_C, "OnPassPanel");
+                    game_C.Battle(user, collision, "Pass");
+                    //SelectedPanel(userModel_C, "OnPassPanel");
+                    Close();
                 });
                 OnPassCutButton.AddListener(() => {
-                    userModel_C.PassCut();
+                    game_C.Battle(user, collision, "PassCut");
+                    Close();
                 });
                 OnDribbleButton.AddListener(() => {
-                    userModel_C.Dribble();
+                    game_C.Battle(user, collision, "Dribble");
+                    Close();
                 });
                 OnDribbleCutButton.AddListener(() => {
-                    userModel_C.DribbleCut();
+                    game_C.Battle(user, collision, "DribbleCut");
+                    Close();
                 });
             }
         }
@@ -99,13 +105,13 @@ public class CommandView_C : MonoBehaviour
                 OnPassButton.AddListener(() => {
 					passButton.enabled=false;
                     shootButton.enabled = false;
-                    userModel_C.Pass();
-                    //SelectedPanel(userModel_C, "OnPassPanel");
+                    game_C.Battle(user, collision, "Pass");
+                    Close();
                 });
-                OnDribbleButton.AddListener(() => {
+                OnShootButton.AddListener(() => {
                     passButton.enabled = false;
 					shootButton.enabled=false;
-					SelectedPanel(userModel_C, "OnShootPanel");
+					SelectedPanel(user, collision, "OnShootPanel");
                 });
             }
         }
@@ -126,13 +132,19 @@ public class CommandView_C : MonoBehaviour
             onShootPanel.SetActive(true);
             //Button設定
             strongShootButton = onShootPanel.transform.Find("StrongShootButton").gameObject.GetComponent<Button>();
-            normalShootButton = uvg.transform.Find("NormalShootButton").gameObject.GetComponent<Button>();
+            normalShootButton = onShootPanel.transform.Find("NormalShootButton").gameObject.GetComponent<Button>();
+            strongShootButton.enabled = true;
+            normalShootButton.enabled = true;
+            if (userModel_C.hp < 20) { strongShootButton.enabled = false; }
+
             {
                 OnStrongShootButton.AddListener(() => {
-                    userModel_C.Shoot();
+                    game_C.Battle(user, collision, "StrongShoot");
+                    Close();
                 });
                 OnNormalShootButton.AddListener(() => {
-                    userModel_C.Shoot();
+                    game_C.Battle(user, collision, "NormalShoot");
+                    Close();
                 });
             }
         }
@@ -142,10 +154,13 @@ public class CommandView_C : MonoBehaviour
 	public void ButtonReset()
 	{
 		passButton = null;
-		dribbleButton = null;
-		passCutButton = null;
-		shootButton = null;
-	}
+        passCutButton = null;
+        dribbleButton = null;
+        dribbleCutButton = null;
+        shootButton = null;
+        strongShootButton = null;
+        normalShootButton = null;
+    }
 
 	//全てのパネルを閉じる
 	public void Close()
@@ -154,7 +169,8 @@ public class CommandView_C : MonoBehaviour
 		uve.SetActive(false);
 		uvg.SetActive(false);
 		onPassPanel.SetActive(false);
-	}
+        onShootPanel.SetActive(false);
+    }
 
 	//Buttonのクリック判定
 	public Button.ButtonClickedEvent OnPassButton
