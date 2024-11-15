@@ -16,8 +16,8 @@ TagManager:
   - User
   - Enemy
   - Ball
-  - Goal
-  - OwnGoal
+  - UserGoal
+  - EnemyGoal
   - Keeper
   - 
   - 

@@ -369,6 +369,7 @@
 "Assets/Script/Command/Model/KeeperModel_C.cs"
 "Assets/Script/Command/Model/UserModel_C.cs"
 "Assets/Script/Command/View/CommandView_C.cs"
+"Assets/Script/Command/View/HPText.cs"
 "Assets/Script/MainCamera.cs"
 "Assets/Script/Stage.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"
