@@ -339,9 +339,15 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
     m_SelectedIDs: 085f0000
     m_LastClickedID: 24328
     m_ExpandedIDs: 000000006c5e00006e5e0000705e0000725e0000745e0000025f0000085f000000ca9a3b
+=======
+    m_SelectedIDs: 025f0000
+    m_LastClickedID: 24322
+    m_ExpandedIDs: 000000006a5e00006c5e00006e5e0000705e0000725e0000
+>>>>>>> parent of 48593f9e (InazumaBlitz ver1.2)
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -369,7 +375,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 000000006c5e00006e5e0000705e0000725e0000745e0000
+=======
+    m_ExpandedIDs: 000000006a5e00006c5e00006e5e0000705e0000725e0000
+>>>>>>> parent of 48593f9e (InazumaBlitz ver1.2)
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -511,7 +521,11 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
+<<<<<<< HEAD
       m_ExpandedIDs: 3af9ffff02fbffffd45b0000d85b00009c5c0000
+=======
+      m_ExpandedIDs: 02fbffff
+>>>>>>> parent of 48593f9e (InazumaBlitz ver1.2)
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
